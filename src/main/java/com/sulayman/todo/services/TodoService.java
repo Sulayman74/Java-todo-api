@@ -7,6 +7,7 @@ import com.sulayman.todo.repository.TodoRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,16 +15,34 @@ import java.util.stream.Collectors;
 @Service
 public class TodoService {
 
+    private final TodoRepository todoRepository;
     @Autowired
-    private TodoRepository todoRepository;
-
+    public TodoService(TodoRepository todoRepository) {
+        this.todoRepository = todoRepository;
+    }
+    @Transactional(readOnly = true)
     public List<TodoDTO> getAllTodosWithUser() {
-        List<Todo> todos = todoRepository.findAll();
+        List<Todo> todos = todoRepository.findAllWithUser();
 
         return todos.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
     }
+
+    public Todo findById(Long id) {
+        return todoRepository.findById(id).orElseThrow(() -> new RuntimeException("Sorry Todo not found"));
+    }
+
+    public Todo save(Todo todo) {
+        return todoRepository.save(todo);
+    }
+public Todo updateTodo(Long id, TodoDTO todoDTO) {
+        Todo todo = findById(id);
+        todo.setTitle(todoDTO.getTitle());
+        todo.setDescription(todoDTO.getDescription());
+        return todoRepository.save(todo);
+}
+
 
     private TodoDTO convertToDto(Todo todo) {
         TodoDTO todoDto = new TodoDTO();
