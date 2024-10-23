@@ -82,6 +82,26 @@ Content-Type: application/json
     }
 }
 ```
+
+
+### Accéder à Swagger
+
+L’interface Swagger est disponible pour explorer et tester les endpoints de l’API. Elle est accessible à l’URL suivante :
+
+http://localhost:8080/swagger-ui/index.html
+
+Accéder à la Console H2 (Hibernate)
+
+Tu peux également accéder à la console H2 pour voir les données stockées en mémoire (grâce à Hibernate). Utilise l’URL suivante :
+
+http://localhost:8080/h2-console
+
+Détails de connexion :
+
+•	JDBC URL : jdbc:h2:mem:testDb
+•	User Name : sa
+•	Password : (laisse vide ou mets le mot de passe défini dans application.properties)
+
 ### Dépendances
 ```
 <dependencies>
