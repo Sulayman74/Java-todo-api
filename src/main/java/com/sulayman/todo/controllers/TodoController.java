@@ -3,6 +3,7 @@ package com.sulayman.todo.controllers;
 import com.sulayman.todo.dto.TodoDTO;
 import com.sulayman.todo.entity.Todo;
 import com.sulayman.todo.repository.TodoRepository;
+import com.sulayman.todo.services.AuthService;
 import com.sulayman.todo.services.TodoService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +20,25 @@ import java.util.List;
 public class TodoController {
     private final TodoRepository todoRepository;
     private final TodoService todoService;
+    private final AuthService authService;
     @Autowired
-    public TodoController(TodoRepository todoRepository, TodoService todoService) {
+    public TodoController(TodoRepository todoRepository, TodoService todoService, AuthService authService) {
         this.todoRepository = todoRepository;
         this.todoService = todoService;
+        this.authService = authService;
     }
 
 
     @GetMapping
     public List<TodoDTO> getAllTodos() {
         return todoService.getAllTodosWithUser();
+    }
+
+    @GetMapping("/user")
+    public List<TodoDTO> getTodosForUser() {
+
+        String userId = authService.getAuthenticatedUserId();
+        return todoService.getTodosByUserId(Long.parseLong(userId));
     }
 
     @GetMapping("/{id}")

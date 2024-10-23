@@ -42,6 +42,13 @@ public Todo updateTodo(Long id, TodoDTO todoDTO) {
         todo.setDescription(todoDTO.getDescription());
         return todoRepository.save(todo);
 }
+    public List<TodoDTO> getTodosByUserId(Long userId) {
+        List<Todo> todos = todoRepository.findAllByUserId(userId);
+
+        return todos.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
 
 
     private TodoDTO convertToDto(Todo todo) {

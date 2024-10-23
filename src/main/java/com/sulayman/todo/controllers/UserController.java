@@ -25,10 +25,7 @@ public class UserController {
     }
 
     @GetMapping
-    public List<UserDTO> getAllUsers()
-    {
-        return userService.findAll();
-    }
+    public List<UserDTO> getAllUsers() {return userService.findAll();}
 
     @GetMapping("/{id}")
     public User getUserById(@PathVariable Long id){

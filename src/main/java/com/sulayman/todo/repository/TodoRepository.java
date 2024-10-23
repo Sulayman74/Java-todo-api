@@ -9,4 +9,7 @@ import java.util.List;
 public interface TodoRepository extends JpaRepository<Todo,Long> {
     @Query("SELECT t FROM Todo t JOIN FETCH t.user")
     List<Todo> findAllWithUser();
+
+    List<Todo> findAllByUserId(Long userId);
+
 }

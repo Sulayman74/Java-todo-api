@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<User,Long> {
 
-    @Query("SELECT t FROM Todo t")
+    @Query("SELECT t FROM User t")
     List<User> findAllUsers();
 
     User findUserById(Long id);
