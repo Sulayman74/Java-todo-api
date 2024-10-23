@@ -12,16 +12,16 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(length = 500)
-    private String email;
-    @Column(length = 500)
-    private String firstname;
     private Long id;
-    @Column(length = 500)
+    @Column(length = 250)
+    private String email;
+    @Column(length = 250)
+    private String firstname;
+    @Column(length = 250)
     private String lastname;
-    @Column(length = 500)
+    @Column(length = 250)
     private String password;
-    @Column(length = 100)
+    @Column(length = 250)
     private String title;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonBackReference
