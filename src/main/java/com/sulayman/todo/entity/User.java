@@ -2,7 +2,7 @@ package com.sulayman.todo.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
 
 import java.util.List;
 
